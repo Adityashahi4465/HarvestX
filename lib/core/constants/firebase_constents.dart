@@ -1,4 +1,7 @@
 class FirebaseConstants {
-  static const usersCollection = 'accounts';
+  static const usersCollection = 'users';
   static const expensesCollection = 'expenses';
+
+ 
+
 }

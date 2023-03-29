@@ -1,17 +1,19 @@
-import 'package:harvestx/route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'core/common/errorText.dart';
-import 'core/common/loder.dart';
-import 'firebase_options.dart';
-import 'package:routemaster/routemaster.dart';
+import 'package:harvestx/features/auth/remember_me/navigation.dart';
+import 'package:harvestx/features/auth/screens/login_Screen.dart';
+import 'package:harvestx/features/auth/screens/register_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'models/user_model.dart';
+import 'core/constants/shared_pref.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  sharedPreferences = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -30,61 +32,35 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
-  UserModel? userModel;
-  void getData(WidgetRef ref, User data) async {
-    print('getData called');
-    userModel = await ref
-        .watch(authControllerProvider.notifier)
-        .getUserData(data.email.toString())
-        .first;
-    ref.read(userProvider.notifier).update((state) => userModel);
-  }
+  var user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    print('userModel in build: $userModel');
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'HarvestX',
+      initialRoute: user != null ? '/navigation_to_home' : '/login_screen',
+      routes: {
+        // '/customer_signup': (context) => const CustomerRegister(),
+        '/login_screen': (context) => const LoginPage(),
+        '/register_screen': (context) => const RegisterPage(),
+        '/navigation_to_home': (context) => const NavigationFromLogin(),
+        // '/supplier_signup': (context) => const SupplierRegister(),
+        // '/customer_home': (context) => const CustomerHomeScreen(),
+        // '/supplier_home': (context) => const SupplierHomeScreen(),
 
-    return ref.watch(authStateChangeProvider).when(
-          data: (data) => MaterialApp.router(
-            // if The data available means user is logged in
-            debugShowCheckedModeBanner: false,
-            title: 'AttainFinance',
-
-            theme: ThemeData(
-              brightness: Brightness.light,
-              appBarTheme: const AppBarTheme(
-                centerTitle: true,
-                actionsIconTheme: IconThemeData(
-                  color: Colors.black54,
-                ),
-                titleTextStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            routerDelegate: RoutemasterDelegate(
-              routesBuilder: (context) {
-                if (data != null) {
-                  print('data != null ? : $data');
-                  // if (userModel != null) {
-                  if (ref.watch(userProvider) != null) {
-                    print(
-                        'userProvider.notifier: ${ref.read(userProvider.notifier)}');
-                    return loggedInRouter;
-                    // }
-                  } else {
-                    getData(ref, data);
-                  }
-                }
-                return loggedOutRouter;
-              },
-            ),
-            routeInformationParser: const RoutemasterParser(),
-          ),
-          error: (error, stackTrace) => ErrorText(error: error.toString()),
-          loading: () => const Loader(),
-        );
+        // '/edit_business': (context) => const EditBusiness(),
+        // '/manage_products': (context) => const ManageProducts(),
+        // '/my_store': (context) => const MyStore(),
+        // 'supplier_balance': (context) => const BalanceScreen(),
+        // '/supplier_orders': (context) => const SupplierOrders(),
+        // '/supplier_statics': (context) => const StaticsScreen(),
+        // '/cart_screen': (context) => const CartScreen(
+        //       back: AppBarBackButton(),
+        //     ),
+        // '/wishlist_screen': (context) => const WishListScreen(),
+        // '/customer_orders': (context) => const CustomerOrders(),
+      },
+    );
   }
 }
