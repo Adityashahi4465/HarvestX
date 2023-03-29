@@ -313,7 +313,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   Navigator
                                                       .pushReplacementNamed(
                                                           context,
-                                                          '/welcome_screen');
+                                                          '/login_screen');
                                                 },
                                               );
                                             },
