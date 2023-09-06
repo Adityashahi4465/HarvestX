@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:harvestx/features/home/screens/costumer/profile.dart';
-import 'package:harvestx/features/home/screens/for_both/shop_screen.dart';
+import 'package:harvestx/features/home/screens/for_both/shop_screen/shop_screen.dart';
 
 import '../../../../core/common/bottom_nev_bar/bottom_nev_bar.dart';
+import '../for_both/cart/cart_screen.dart';
 
 class CostumerHomePage extends StatefulWidget {
   const CostumerHomePage({super.key});
@@ -25,9 +26,9 @@ class _CostumerHomePageState extends State<CostumerHomePage> {
   ]);
 
   final List<Widget> _tabs = List.unmodifiable([
-    const ShopScreen(),
-    Container(),
-    Container(),
+     ShopScreen(),
+     Container(),
+    const CartScreen(),
     Container(),
     ProfileScreen(
       documentId: FirebaseAuth.instance.currentUser!.email ?? "",

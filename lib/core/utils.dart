@@ -5,7 +5,7 @@ void showSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
-       SnackBar(
+      SnackBar(
         duration: const Duration(seconds: 2),
         backgroundColor: Colors.yellow,
         content: Text(
@@ -23,3 +23,17 @@ Future<FilePickerResult?> pickImage() async {
   final image = await FilePicker.platform.pickFiles(type: FileType.image);
   return image;
 }
+
+List<String> maincateg = [
+  'select category',
+  'Fruits',
+  'Vegetables',
+  'Canned Goods',
+  'Dairy',
+  'Meat',
+  'Seafood',
+  'Breads and Bakery',
+  'Grains and Pasta',
+  'Snacks',
+  'Beverages',
+];

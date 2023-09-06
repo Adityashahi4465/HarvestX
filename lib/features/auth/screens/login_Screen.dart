@@ -12,6 +12,7 @@ import '../../../core/common/background.dart';
 import '../../../core/common/loder.dart';
 import '../../../core/constants/shared_pref.dart';
 import '../../../core/constants/ui_constants.dart';
+import '../../../theme/pallet.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-             BackgroundImage(),
+            BackgroundImage(),
             Container(
               padding: const EdgeInsets.only(left: 35, right: 35),
               height: MediaQuery.of(context).size.height,
@@ -185,9 +186,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(200, 50),
-                          primary: greenSecondary,
+                          primary: Pallete.greenSecondary,
                           shape: RoundedRectangleBorder(
-                            side: const BorderSide(color: greenSecondary),
+                            side:
+                                const BorderSide(color: Pallete.greenSecondary),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
@@ -219,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                                     context, '/register_screen'),
                               style: const TextStyle(
                                 fontSize: 15,
-                                color: primaryGreen,
+                                color: Pallete.primaryGreen,
                                 fontWeight: FontWeight.w600,
                               ),
                             )

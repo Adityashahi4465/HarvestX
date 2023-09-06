@@ -18,6 +18,7 @@ import '../../../core/constants/ui_constants.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 
 import '../../../core/utils.dart';
+import '../../../theme/pallet.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -245,7 +246,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-             BackgroundImage(),
+            BackgroundImage(),
             SafeArea(
               child: Container(
                 padding: const EdgeInsets.only(left: 35, right: 35),
@@ -427,9 +428,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(200, 50),
-                              primary: greenSecondary,
+                              primary: Pallete.greenSecondary,
                               shape: RoundedRectangleBorder(
-                                side: const BorderSide(color: greenSecondary),
+                                side: const BorderSide(
+                                    color: Pallete.greenSecondary),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                             ),
@@ -461,7 +463,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         context, '/login_screen'),
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: primaryGreen,
+                                    color: Pallete.primaryGreen,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 )

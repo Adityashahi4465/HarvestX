@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:harvestx/core/providers/cart_provider.dart';
 import 'package:harvestx/features/auth/remember_me/navigation.dart';
 import 'package:harvestx/features/auth/screens/login_Screen.dart';
 import 'package:harvestx/features/auth/screens/register_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constants/shared_pref.dart';
+import 'features/home/screens/for_both/cart/cart_screen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -18,24 +20,21 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_)=>Cart()),
+    ],
+    child: const MyApp())
   );
 }
 
-class MyApp extends ConsumerStatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
-  var user = FirebaseAuth.instance.currentUser;
-
-  @override
+  
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'HarvestX',
@@ -55,12 +54,11 @@ class _MyAppState extends ConsumerState<MyApp> {
         // 'supplier_balance': (context) => const BalanceScreen(),
         // '/supplier_orders': (context) => const SupplierOrders(),
         // '/supplier_statics': (context) => const StaticsScreen(),
-        // '/cart_screen': (context) => const CartScreen(
-        //       back: AppBarBackButton(),
-        //     ),
+        '/cart_screen': (context) => const CartScreen(),
         // '/wishlist_screen': (context) => const WishListScreen(),
         // '/customer_orders': (context) => const CustomerOrders(),
       },
     );
   }
 }
+

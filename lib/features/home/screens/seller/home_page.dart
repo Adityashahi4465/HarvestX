@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:harvestx/features/home/screens/for_both/shop_screen.dart';
-import 'package:harvestx/features/home/screens/seller/dashboard.dart';
+import 'package:harvestx/features/home/screens/for_both/cart/cart_screen.dart';
+import 'package:harvestx/features/home/screens/for_both/shop_screen/shop_screen.dart';
+import 'package:harvestx/features/home/screens/seller/main_screens/dashboard.dart';
+import 'package:harvestx/features/home/screens/seller/main_screens/upload_product_screen.dart';
 
 import '../../../../core/common/bottom_nev_bar/bottom_nev_bar.dart';
 
 class SellerHomePage extends StatefulWidget {
+  const SellerHomePage({super.key});
+
   @override
   _SellerHomePageState createState() => _SellerHomePageState();
 }
@@ -22,11 +25,11 @@ class _SellerHomePageState extends State<SellerHomePage> {
   ]);
 
   final List<Widget> _tabs = List.unmodifiable([
-    const ShopScreen(),
+    ShopScreen(),
     Container(),
-    Container(),
+    const CartScreen(),
     const DashboardScreen(),
-    Container(),
+    const UploadProductScreen(),
   ]);
 
   void onTabChanged(int index) {

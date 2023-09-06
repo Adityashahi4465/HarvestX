@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 
+import '../../../theme/pallet.dart';
 import '../../constants/ui_constants.dart';
 import 'nav_bar_item.dart';
 
@@ -27,7 +28,7 @@ class NavBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 0),
-            color: kShadowColor.withOpacity(0.14),
+            color: Pallete.kShadowColor.withOpacity(0.14),
             blurRadius: 25,
           ),
         ],
